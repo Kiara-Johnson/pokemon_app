@@ -1,17 +1,31 @@
 import React, { Component } from 'react'
 
-const myStyle = {
-    color: '#ffffff',
-    backgroundColor: '#000000',
-  };
+const pokemon = require('../models/pokemon')
 
+const myStyle = {
+    color: 'rgb(255,255,255)',
+    backgroundColor: 'rgb(105,105,105)',
+};
 
 export default class Index extends Component {
   render() {
     return (
-      <div>
+        <div>
         <h1>See the Pokemon!</h1>
-      </div>
+        <ul>
+            {pokemon?.map((pokemon, i) => {
+                return (
+                    <li key = {i}>
+                        <a href = {`/pokemon/${i}`}>
+                            {pokemon.name}
+                        </a>
+                        
+                    </li>
+                )
+            })}
+     
+               </ul>
+             </div>
     )
   }
 }
