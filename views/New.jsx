@@ -14,7 +14,7 @@ export default class New extends Component {
         <h1>Newly Caught!</h1>
         <form action="/pokemon" method="POST">
             Name: <input type="text" name="name" /><br />
-            img: <input type="url" name="image" /><br />
+            Image: <input type="text" name="image" /><br />
             <input type="submit" name="" value="New Pokemon"/>        
         </form>
         <a href="/pokemon">Back</a>

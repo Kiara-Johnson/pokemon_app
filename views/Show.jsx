@@ -13,7 +13,7 @@ export default class Show extends Component {
       <div>
         <h1>Catch 'Em!</h1>
         <h2>{pokemon.name}</h2>
-        <img src={`${pokemon.img}.jpg`} />
+        <img src={pokemon.img} />
         <a href="/pokemon">Back</a>
       </div>
       </html>
