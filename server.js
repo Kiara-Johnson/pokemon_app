@@ -4,6 +4,9 @@ const app = express();
 const mongoose = require("mongoose");
 const Pokemon = require("./models/pokemon");
 
+const methodOverride = require("method-override");
+app.use(methodOverride("_method"));
+
 app.set("view engine", "jsx");
 app.engine("jsx", require("express-react-views").createEngine());
 app.use(express.urlencoded({ extended: false }));
@@ -66,34 +69,30 @@ app.get("/pokemon/new", (req, res) => {
 
 //delete
 app.delete("/pokemon/:id", (req, res) => {
-  const id = req.params.id;
-  Pokemon.findByIdAndRemove(id)
-    .then((pokemon) => {
+  Pokemon.findByIdAndRemove(req.params.id,(err, updatedPokemon) => {
       res.redirect("/pokemon");
     })
-    .catch((error) => {
-      console.log(error);
-      res.json({ error });
-    });
 });
 
 //update
 app.put("/pokemon/:id", (req, res) => {
-  const id = req.params.id;
-  Pokemon.findByIdAndUpdate(id, req.body, { new: true })
-    .then((pokemon) => {
-      res.redirect("/pokemon");
-    })
-    .catch((error) => {
-      console.log(error);
-      res.json({ error });
-    });
-});
+  Pokemon.findByIdAndUpdate(req.params.id, req.body, (err, updatedPokemon) => { 
+    res.redirect(`/pokemon/${req.params.id}`);
+  })
+})
+
 
 //create
 app.post("/pokemon", (req, res) => {
   Pokemon.create(req.body, (error, newPokemon) => {
     res.redirect("/pokemon");
+  });
+});
+
+//edit
+app.get("pokemon/:id/edit", (req, res) => {
+  Pokemon.findById(req.params.id, (err, pokemonData) => {
+    res.render("Edit", { pokemon: pokemonData });
   });
 });
 

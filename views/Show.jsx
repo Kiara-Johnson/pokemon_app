@@ -5,6 +5,7 @@ const myStyle = {
   backgroundColor: 'rgba(10,255,255,.4)',
 };
 
+
 export default class Show extends Component {
   render() {
     const pokemon = this.props.pokemon
@@ -13,8 +14,9 @@ export default class Show extends Component {
       <div>
         <h1>Catch 'Em!</h1>
         <h2>{pokemon.name}</h2>
-        <img src={pokemon.img} />
-        <a href="/pokemon">Back</a>
+        <img src={pokemon.img} alt={`${pokemon.name}'s image`}></img><br />
+        <a href="/pokemon">Back</a><br />
+        <a href="/pokemon/{pokemon._id}/edit">Edit</a>
       </div>
       </html>
     )
